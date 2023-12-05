@@ -44,8 +44,7 @@ const sampleText = `
 
 const text = fs.readFileSync('input', 'utf-8');
 const lines = text.split("\n").filter(line => line);
-const schematic = lines.map((line => [...line]));
-const spacer = '.';
+const schematic = lines.map(line => [...line]);
 
 function* numbers(s) {
     let currentNumber = '';
