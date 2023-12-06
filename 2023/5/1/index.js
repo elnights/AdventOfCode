@@ -139,7 +139,7 @@ humidity-to-location map:
 const fs = require('node:fs');
 
 const text = fs.readFileSync('input', 'utf-8');
-const lines = text.split("\n");
+const lines = text.split('\n');
 
 let seeds = lines[0].split(':')[1].trim().split` `.map(x => +x);
 

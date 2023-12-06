@@ -47,7 +47,7 @@ Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11
 const fs = require('node:fs');
 
 const text = fs.readFileSync('input', 'utf-8');
-const lines = text.split("\n").filter(line => line);
+const lines = text.split('\n').filter(line => line);
 const cards = lines.map(line => {
     let [winningNumbers, myNumbers] = line
         .split(':')[1]
