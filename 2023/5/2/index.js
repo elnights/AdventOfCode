@@ -55,7 +55,7 @@ const fs = require('node:fs');
 
 const text = fs.readFileSync('input', 'utf-8');
 const lines = text.split('\n');
-const {multirange} = require('multi-integer-range');
+const mr= require('multi-integer-range');
 
 let seedRanges = lines[0]
     .match(/\d+\s\d+/g)
@@ -80,24 +80,26 @@ function* iterMaps(lines) {
     }
 }
 
-let indexRanges = multirange(seedRanges);
+let indexRanges = mr.normalize(seedRanges);
 
 for (let map of iterMaps(lines.slice(1))) {
-    let mappedIndexRanges = multirange([]);
+    let mappedIndexRanges = [];
 
     for (let [destinationRangeStart, sourceRangeStart, rangeLength] of map) {
-        if (!indexRanges.length()) break;
-        let intersection = indexRanges.clone()
-            .intersect([[sourceRangeStart, sourceRangeStart + rangeLength - 1]]);
+        if (!mr.length(indexRanges)) break;
 
-        indexRanges.subtract(intersection);
+        let intersection = mr.intersect(indexRanges,
+            [[sourceRangeStart, sourceRangeStart + rangeLength - 1]]);
+
+        indexRanges = mr.subtract(indexRanges, intersection);
 
         // transform indices according to mapper
-        mappedIndexRanges.append(
-            intersection.getRanges().map(range => range.map(index => index - sourceRangeStart + destinationRangeStart))
-        );
+        mappedIndexRanges = mr.append(mappedIndexRanges, intersection.map(
+            range => range.map(index => index - sourceRangeStart + destinationRangeStart)
+        ))
     }
-    indexRanges.append(mappedIndexRanges);
+
+    indexRanges = mr.append(indexRanges, mappedIndexRanges);
 }
 
-console.log(indexRanges.shift());
+console.log(mr.min(indexRanges));
