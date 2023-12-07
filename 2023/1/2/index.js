@@ -17,7 +17,7 @@ const digitsMap = {
 (async function processLineByLine() {
     try {
         const rl = createInterface({
-            input: createReadStream('input'),
+            input: createReadStream('../input'),
             crlfDelay: Infinity,
         });
 

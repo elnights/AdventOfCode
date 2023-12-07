@@ -5,7 +5,7 @@ const { createInterface } = require('node:readline');
 (async function processLineByLine() {
     try {
         const rl = createInterface({
-            input: createReadStream('input'),
+            input: createReadStream('../input'),
             crlfDelay: Infinity,
         });
 
