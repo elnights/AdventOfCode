@@ -36,5 +36,3 @@ do {
 } while (ghostSteps.size !== currNodes.length);
 
 console.log(math.lcm(...Array.from(ghostSteps).map(([, steps]) => steps)));
-
-
