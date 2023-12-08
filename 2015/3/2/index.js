@@ -5,7 +5,7 @@ const dms = 2;
 
 let houses = new Set(['x0y0']);
 
-for (let dm = 0; dm < 2; dm++) {
+for (let dm = 0; dm < dms; dm++) {
     let x = 0,
         y = 0;
 
