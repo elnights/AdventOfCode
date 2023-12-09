@@ -7,7 +7,6 @@ const forbidden = /ab|cd|pq|xy/;
 const twoInARow = /(\w)\1/;
 
 let niceStrings = lines.filter(line => {
-    let vowelsMatch
     if ((line.match(vowels) ?? []).length < 3) return false;
     if (line.match(forbidden)) return false;
     return line.match(twoInARow);
